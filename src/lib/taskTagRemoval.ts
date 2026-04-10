@@ -63,8 +63,13 @@ export function removeTagFromTaskLine(line: string, tag: string): string {
 		return line;
 	}
 
+	const tagRegex = buildTagRegex(tag);
+	if (!tagRegex.test(line)) {
+		return line;
+	}
+
 	const updated = line
-		.replace(buildTagRegex(tag), "$1")
+		.replace(tagRegex, "$1")
 		.replace(/[ \t]{2,}/g, " ")
 		.replace(/\s+$/g, "");
 

@@ -51,6 +51,18 @@ describe("removeTagFromTaskLine", () => {
 		);
 	});
 
+	it("does not rewrite unrelated task lines just because they have extra whitespace", () => {
+		expect(
+			removeTagFromTaskLine("- [ ] Call Alex  #phone  ", "#later-today"),
+		).toBe("- [ ] Call Alex  #phone  ");
+	});
+
+	it("removes hyphenated tags exactly", () => {
+		expect(
+			removeTagFromTaskLine("- [ ] Call Alex #later-today #phone", "#later-today"),
+		).toBe("- [ ] Call Alex #phone");
+	});
+
 	it("preserves unrelated tags and collapses extra whitespace", () => {
 		expect(
 			removeTagFromTaskLine("- [ ] Call Alex #next #phone  ", "#next"),
@@ -108,6 +120,23 @@ describe("scanContentForTag", () => {
 			["- [ ] One", "- [ ] Two #phone", "- [x] Three #next", "* [ ] Four #next"].join(
 				"\n",
 			),
+		);
+	});
+
+	it("does not include whitespace-only changes as matches", () => {
+		const result = scanContentForTag(
+			[
+				"- [ ] One  #phone  ",
+				"- [ ] Two #later-today",
+				"- [ ] Three #agenda   ",
+			].join("\n"),
+			"#later-today",
+		);
+
+		expect(result.matches).toHaveLength(1);
+		expect(result.matches[0]?.lineNumber).toBe(2);
+		expect(result.updatedContent).toBe(
+			["- [ ] One  #phone  ", "- [ ] Two", "- [ ] Three #agenda   "].join("\n"),
 		);
 	});
 });
