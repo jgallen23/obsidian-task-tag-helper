@@ -1,0 +1,10 @@
+{
+	"id": "obsidian-task-tags-helper",
+	"name": "Tasks Tag Helper",
+	"version": "0.1.0",
+	"minAppVersion": "1.5.12",
+	"description": "Manage tags on unchecked tasks across your Obsidian vault.",
+	"author": "Greg Allen",
+	"authorUrl": "https://firstandthird.com",
+	"isDesktopOnly": false
+}

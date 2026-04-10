@@ -1,0 +1,23 @@
+/*
+	Add plugin-specific styles here when the plugin grows UI surfaces.
+	Keep the baseline file so release packaging stays predictable.
+*/
+.task-tags-helper-preview {
+	max-height: 20rem;
+	overflow: auto;
+	padding: 0.75rem;
+	border: 1px solid var(--background-modifier-border);
+	border-radius: 0.5rem;
+	background: var(--background-secondary);
+	font-family: var(--font-monospace);
+	font-size: var(--font-ui-smaller);
+	line-height: 1.4;
+	white-space: pre-wrap;
+}
+
+.task-tags-helper-modal-actions {
+	display: flex;
+	justify-content: flex-end;
+	gap: 0.75rem;
+	margin-top: 1rem;
+}
